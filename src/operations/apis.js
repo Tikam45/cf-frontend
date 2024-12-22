@@ -1,4 +1,4 @@
-const BASE_URL = "https://cf-backend-api.vercel.app/"
+const BASE_URL = "https://cf-backend-api.vercel.app"
 
 export const endpoints = {
     SENDOTP_API : BASE_URL + "/auth/sendotp",
