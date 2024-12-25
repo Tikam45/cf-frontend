@@ -12,78 +12,6 @@ const OrderDetails = () => {
     const [showBidForm, setShowBidForm] = useState(false);
     const [formData, setFormData] = useState({ price: "", description: "" });
 
-    const styles = {
-        container: {
-            padding: "20px",
-            maxWidth: "800px",
-            margin: "0 auto",
-        },
-        orderStatus: {
-            padding: "10px",
-            borderRadius: "5px",
-            marginBottom: "20px",
-            fontSize: "18px",
-            fontWeight: "bold",
-        },
-        orderStatusActive: {
-            backgroundColor: "#d4edda",
-            color: "#155724",
-            border: "1px solid #c3e6cb",
-        },
-        orderStatusInactive: {
-            backgroundColor: "#f8d7da",
-            color: "#721c24",
-            border: "1px solid #f5c6cb",
-        },
-        imagesContainer: {
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "10px",
-            marginBottom: "20px",
-        },
-        image: {
-            width: "100%",
-            maxWidth: "180px",
-            height: "auto",
-            borderRadius: "5px",
-            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-        },
-        form: {
-            backgroundColor: "#f9f9f9",
-            padding: "20px",
-            borderRadius: "5px",
-            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-            marginTop: "20px",
-        },
-        input: {
-            width: "calc(100% - 20px)",
-            padding: "10px",
-            marginBottom: "10px",
-            border: "1px solid #ccc",
-            borderRadius: "5px",
-            fontSize: "16px",
-        },
-        button: {
-            backgroundColor: "#007bff",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            padding: "10px 20px",
-            fontSize: "16px",
-            cursor: "pointer",
-            transition: "background-color 0.3s",
-        },
-        buttonHover: {
-            backgroundColor: "#0056b3",
-        },
-        noData: {
-            textAlign: "center",
-            color: "#777",
-            fontSize: "20px",
-            marginTop: "50px",
-        },
-        
-    };
 
     const handleFormChange = (e) => {
         setFormData((prevData) => ({ ...prevData, [e.target.name]: e.target.value }));
@@ -123,26 +51,28 @@ const OrderDetails = () => {
     }, [orderId]);
 
     return (
-        <div style={styles.container}>
+        <div className="flex flex-col items-center justify-center h-screen">
             {data ? (
-                <div>
+                <div className="flex flex-col items-center gap-4 w-fit p-20 border-2 border-gray-300">
                     {data.isActive && (
-                        <div style={{ ...styles.orderStatus, ...styles.orderStatusActive }}>
+                        <div className="text-green-500">
                             Order is Currently Accepting Bids
                         </div>
                     )}
                     {!data.isActive && (
-                        <div style={{ ...styles.orderStatus, ...styles.orderStatusInactive }}>
+                        <div className="text-red-500">
                             Order is filled. Not accepting Bids
                         </div>
                     )}
-                    <div className="images-container">
-                        <img src={data.coverPhoto} alt="Cover Photo" className="cover-photo" />
-                        <img src={data.firstPic}  className="small-image" />
-                        <img src={data.secondPic}  className="small-image" />
-                        <img src={data.thirdPic} className="small-image" />
-                        <a href={data.landDocument} download className="land-document">
-                            <img src={data.landDocument} alt="Land Document" />
+                    <div className="flex flex-col gap-4">
+                        <img src={data.coverPhoto} alt="Cover Photo" className="" />
+                        <div className="flex  gap-4">
+                            <img src={data.firstPic} />
+                            <img src={data.secondPic}   />
+                            <img src={data.thirdPic}  />
+                        </div>
+                        <a href={data.landDocument} download className="text-blue-500">
+                            <img src={data.landDocument} alt="Land Document" className=""/>
                         </a>
                     </div>
 
@@ -151,7 +81,7 @@ const OrderDetails = () => {
                     <p>₹{data.price}</p>
                     {data.isActive && (
                         <button
-                            style={styles.button}
+                            className="w-fit p-3 text-white bg-gray-900 rounded hover:bg-gray-500 "
                             onClick={() => setShowBidForm(!showBidForm)}
                         >
                             Create Bid
@@ -159,15 +89,15 @@ const OrderDetails = () => {
                     )}
 
                     {showBidForm && (
-                        <form style={styles.form} onSubmit={BidCreation}>
+                        <form  onSubmit={BidCreation} className="flex flex-col gap-3 justify-center items-center">
                             <input
                                 type="number"
                                 name="price"
                                 placeholder="Enter your desired Price"
                                 onChange={handleFormChange}
                                 value={formData.price}
-                                style={styles.input}
                                 required
+                                className="w-fit border-2 border-gray-300 p-2"
                             />
                             <input
                                 type="text"
@@ -175,17 +105,17 @@ const OrderDetails = () => {
                                 placeholder="Message You want to convey..."
                                 onChange={handleFormChange}
                                 value={formData.description}
-                                style={styles.input}
                                 required
+                                className="w-fit border-2 border-gray-300 p-2"
                             />
-                            <button type="submit" style={styles.button}>
+                            <button type="submit" className="w-fit p-3 text-white bg-gray-900 rounded hover:bg-gray-500 ">
                                 Add Bid
                             </button>
                         </form>
                     )}
                 </div>
             ) : (
-                <div style={styles.noData}>No order data available</div>
+                <div className="">No order data available</div>
             )}
         </div>
     );

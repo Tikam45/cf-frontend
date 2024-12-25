@@ -84,77 +84,37 @@ const ProfileDashboard = ({ firstName, lastName, email, mobileNo, profilePic }) 
     }
   };
 
-  const styles = {
-    container: {
-      maxWidth: "400px",
-      margin: "20px auto",
-      padding: "20px",
-      border: "1px solid #ccc",
-      borderRadius: "10px",
-      boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-      textAlign: "center",
-      backgroundColor: "#f9f9f9",
-    },
-    header: {
-      marginBottom: "20px",
-    },
-    profilePic: {
-      width: "100px",
-      height: "100px",
-      borderRadius: "50%",
-      objectFit: "cover",
-      border: "2px solid #007bff",
-      cursor: "pointer",
-    },
-    name: {
-      marginTop: "10px",
-      fontSize: "1.5em",
-      color: "#333",
-    },
-    details: {
-      textAlign: "left",
-    },
-    detailItem: {
-      fontSize: "1em",
-      margin: "8px 0",
-      color: "#555",
-    },
-    detailLabel: {
-      color: "#000",
-      fontWeight: "bold",
-    },
-  };
-
   return (
-    <div style={styles.container}>
-      <div style={styles.header}>
-        <label>
+    <div >
+      <div className="flex items-center">
+        <label className="relative cursor-pointer">
           <img
             src={selectedImage || data.image || "https://via.placeholder.com/150"}
             alt={`${data.firstName} ${data.lastName}`}
-            style={styles.profilePic}
+            className="h-20 w-20 rounded-full object-cover"
           />
           <input
             type="file"
             style={{ display: "none" }}
             accept="image/*"
             onChange={handleImageChange}
+            className="absolute top-0 left-0 w-full h-full opacity-0"
           />
         </label>
-        <h1 style={styles.name}>{`${data.firstName} ${data.lastName}`}</h1>
+        <h1>{`${data.firstName} ${data.lastName}`}</h1>
       </div>
-      <div style={styles.details}>
-        <p style={styles.detailItem}>
-          <span style={styles.detailLabel}>Email:</span> {data.email}
+      <div className="flex flex-col">
+        <p className="flex items-center">
+          <span >Email:</span> {data.email}
         </p>
-        <p style={styles.detailItem}>
-          <span style={styles.detailLabel}>Mobile:</span> {mobile}
+        <p className="flex items-center">
+          <span >Mobile:</span> {mobile}
         </p>
         {mobile ? (
           <div></div>
         ) : (
-          <div>
-            <form onSubmit={handleMobileSubmit}>
+          <div className="flex flex-col">
+            <form onSubmit={handleMobileSubmit} className="flex flex-col">
               <label>Mobile Number:</label>
               <input
                 type="tel"
@@ -165,13 +125,14 @@ const ProfileDashboard = ({ firstName, lastName, email, mobileNo, profilePic }) 
                 onChange={(e) => setInputMob(e.target.value)}
                 value={inputMob}
                 required
+                className="mb-2" 
               />
-              <button type="submit">Send OTP</button>
+              <button type="submit" >Send OTP</button>
             </form>
           </div>
         )}
         {showOtpInput && (
-          <form onSubmit={handleOtpSubmit}>
+          <form onSubmit={handleOtpSubmit} className="flex flex-col">
             <label>Enter OTP:</label>
             <input
               type="text"
@@ -179,6 +140,7 @@ const ProfileDashboard = ({ firstName, lastName, email, mobileNo, profilePic }) 
               onChange={(e) => setOtp(e.target.value)}
               value={otp}
               required
+              className="mb-2"
             />
             <button type="submit">Verify OTP</button>
           </form>

@@ -30,99 +30,38 @@ const Navbar = () => {
     dispatch(logout(navigate));
   }
 
-  // Inline styles
-  const styles = {
-    navbar: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      padding: "3px 7px",
-      margin: "0.5rem",
-      backgroundColor: "#f8f9fa",
-      width: "97vw",
-      position: "static",
-      top: "7px"
-    },
-    menuIcon: {
-      fontSize: "1.5rem",
-      cursor: "pointer",
-      color: "black",
-    },
-    navOptions: {
-      display: "flex",
-      alignItems: "center",
-      gap: "15px",
-    },
-    profileContainer: {
-      position: "relative",
-    },
-    profilePic: {
-      width: "40px",
-      height: "40px",
-      borderRadius: "50%",
-      cursor: "pointer",
-    },
-    dropdownMenu: {
-      position: "absolute",
-      top: "50px",
-      right: "0",
-      backgroundColor: "white",
-      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-      borderRadius: "5px",
-      display: isDropdownVisible ? "flex" : "none",
-      flexDirection: "column",
-      padding: "10px",
-      zIndex: 10,
-    },
-    dropdownLink: {
-      textDecoration: "none",
-      color: "black",
-      padding: "8px 12px",
-      borderRadius: "3px",
-      transition: "background-color 0.2s",
-    },
-    logoutBtn: {
-      background: "none",
-      border: "none",
-      cursor: "pointer",
-      textAlign: "left",
-      width: "100%",
-      fontSize: "14px",
-    },
-    heading: {
-        color: "black",
-    }
-  };
 
   return (
-    <div style={styles.navbar}>
-      <BiSolidFoodMenu style={styles.menuIcon} />
-      <h1 style={styles.heading}>Contract Farming</h1>
-      <div style={styles.navOptions}>
+    <div className="flex justify-between items-center p-4 bg-gray-800 text-white">
+      <BiSolidFoodMenu className=""/>
+      <h1 className="bold text-3xl">Contract Farming</h1>
+      <div >
+        <div className="flex space-x-4">
         {token == null && <Link to="/login">Login</Link>}
         {token == null && <Link to="/signup">Signup</Link>}
+        </div>
         {user && (
           <div
-            style={styles.profileContainer}
+            className="flex items-center"
             onMouseEnter={showDropdown}
             onMouseLeave={hideDropdown}
           >
             <img
               src={user.image}
               alt="Profile"
-              style={styles.profilePic}
+              className="w-10 h-10 rounded-full"
             />
             <div style={styles.dropdownMenu}>
-              <Link to="/dashboard" style={styles.dropdownLink}>
+              <Link to="/dashboard" className="">
                 Dashboard
               </Link>
-              <Link to="/profile" style={styles.dropdownLink}>
+              <Link to="/profile" className="">
                 Profile
               </Link>
-              <Link to="/settings" style={styles.dropdownLink}>
+              <Link to="/settings" >
                 Settings
               </Link>
-              <button style={{ ...styles.dropdownLink, ...styles.logoutBtn }} onClick={handleLogout}>
+              <button className="" onClick={handleLogout}>
                 Logout
               </button>
             </div>

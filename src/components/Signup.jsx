@@ -39,16 +39,16 @@ const Signup = () => {
   }
 
   return (
-    <div className="auth-container">
+    <div className="flex flex-col items-center justify-center h-screen">
       {
         token && 
         <h2>You are already Signed up</h2>
       }
       {
         !token && 
-        <div>
-          <h2>Signup</h2>
-          <form onSubmit={handleSubmit}>
+        <div className="flex flex-col items-center gap-4 w-fit p-20 border-2 border-gray-300">
+          <h2 className="bold text-2xl">Signup</h2>
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4 justify-center items-center"> 
             <input
               type="text"
               placeholder="First Name"
@@ -56,6 +56,7 @@ const Signup = () => {
               value={firstName}
               onChange={handleOnChange}
               required
+              className="w-fit border-2 border-gray-300 p-2"
             />
             <input
               type="text"
@@ -64,6 +65,7 @@ const Signup = () => {
               name="lastName"
               onChange={handleOnChange}
               required
+              className="w-fit border-2 border-gray-300 p-2"
             />
             <input
               type="email"
@@ -72,6 +74,7 @@ const Signup = () => {
               value={email}
               onChange={handleOnChange}
               required
+              className="w-fit border-2 border-gray-300 p-2"
             />
             <input
               type="password"
@@ -80,6 +83,7 @@ const Signup = () => {
               value={password}
               onChange={handleOnChange}
               required
+              className="w-fit border-2 border-gray-300 p-2"
             />
             <input
               type="password"
@@ -88,10 +92,11 @@ const Signup = () => {
               value={confirmPassword}
               onChange={handleOnChange}
               required
+              className="w-fit border-2 border-gray-300 p-2"
             />
-            <button type="submit">Signup</button>
+            <button type="submit" className="w-fit p-3 text-white bg-gray-900 rounded hover:bg-gray-500 ">Signup  ➡️</button>
           </form>
-          <Link to="/login" className="toggle-link">
+          <Link to="/login" className="text-blue-500">
             Already have an account? Login
           </Link>
         </div>
