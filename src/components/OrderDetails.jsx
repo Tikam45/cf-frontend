@@ -51,11 +51,11 @@ const OrderDetails = () => {
     }, [orderId]);
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen">
+        <div className="flex flex-col items-center justify-center ">
             {data ? (
                 <div className="flex flex-col items-center gap-4 w-fit p-20 border-2 border-gray-300">
                     {data.isActive && (
-                        <div className="text-green-500">
+                        <div className="text-green-500 >
                             Order is Currently Accepting Bids
                         </div>
                     )}
