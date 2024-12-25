@@ -32,7 +32,7 @@ const Navbar = () => {
 
 
   return (
-    <div className="flex justify-between items-center p-4 bg-gray-800 text-white">
+    <div className="flex justify-between items-center p-4 bg-gray-800 text-white flex-wrap w-screen">
       <BiSolidFoodMenu className=""/>
       <h1 className="bold text-3xl">Contract Farming</h1>
       <div >
@@ -53,17 +53,14 @@ const Navbar = () => {
             />
             {
               isDropdownVisible && (
-                <div className="flex flex-col items-end ml-2 ">
-                  <Link to="/dashboard" className="">
+                <div className="flex flex-col ml-2 absolute top-[4.4rem] right-0 bg-white p-2 rounded-md text-black shadow-lg items-start">
+                  <Link to="/dashboard" className="px-4 py-2">
                     Dashboard
                   </Link>
-                  <Link to="/profile" className="">
+                  <Link to="/profile" className="px-4 py-2">
                     Profile
                   </Link>
-                  <Link to="/settings" >
-                    Settings
-                  </Link>
-                  <button className="" onClick={handleLogout}>
+                  <button className="px-4 py-2 " onClick={handleLogout}>
                     Logout
                   </button>
               </div>
