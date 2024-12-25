@@ -31,7 +31,6 @@ const Dashboard = () => {
   useEffect(() => {
     getData();
   }, [count]);
-  // background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
   return (
     <div className="bg-gradient-to-t from-[#E3FDF5] to-[#FFE6Fa]  mt-8 text-[1.5rem]">
 

@@ -51,7 +51,7 @@ const Navbar = () => {
               alt="Profile"
               className="w-10 h-10 rounded-full"
             />
-            <div style={styles.dropdownMenu}>
+            <div>
               <Link to="/dashboard" className="">
                 Dashboard
               </Link>
