@@ -51,20 +51,24 @@ const Navbar = () => {
               alt="Profile"
               className="w-10 h-10 rounded-full"
             />
-            <div>
-              <Link to="/dashboard" className="">
-                Dashboard
-              </Link>
-              <Link to="/profile" className="">
-                Profile
-              </Link>
-              <Link to="/settings" >
-                Settings
-              </Link>
-              <button className="" onClick={handleLogout}>
-                Logout
-              </button>
-            </div>
+            {
+              isDropdownVisible && (
+                <div className="flex flex-col items-end ml-2 ">
+                  <Link to="/dashboard" className="">
+                    Dashboard
+                  </Link>
+                  <Link to="/profile" className="">
+                    Profile
+                  </Link>
+                  <Link to="/settings" >
+                    Settings
+                  </Link>
+                  <button className="" onClick={handleLogout}>
+                    Logout
+                  </button>
+              </div>
+              )
+            }
           </div>
         )}
       </div>
