@@ -46,8 +46,7 @@ const FarmerDashboard = ({orders, setCount}) => {
                                 data.isActive && 
                                 <div key={index} className=" flex flex-col mx-auto w-fit items-center">
                                     <OrderCard data={data}/>
-                                    <HighlightedButton   onClick={() => handleOnChange(data)}
-                                        text="order Details" className="mx-auto"/>
+                                    <button className= "mx-auto bg-gray-700 rounded "onClick={() => handleOnChange(data)}>More Details</button>
                                 </div>
                                 
                             ))
