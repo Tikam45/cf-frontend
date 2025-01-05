@@ -105,10 +105,10 @@ const ProfileDashboard = ({ firstName, lastName, email, mobileNo, profilePic }) 
         <h1>{`${data.firstName} ${data.lastName}`}</h1>
       </div>
       <div className="flex flex-col gap-2">
-        <p className="flex justify-between">
+        <p className="flex gap-2">
           <span >Email:</span> {data.email}
         </p>
-        <p className="flex justify-between">
+        <p className="flex gap-2">
           <span >Mobile:</span> {mobile}
         </p>
         {mobile ? (
