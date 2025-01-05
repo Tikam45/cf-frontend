@@ -85,8 +85,9 @@ const ProfileDashboard = ({ firstName, lastName, email, mobileNo, profilePic }) 
   };
 
   return (
-    <div >
-      <div className="flex items-center">
+    <div className="h-screen w-screen flex flex-col items-center mt-8" >
+      <div className="w-fit h-fit border-black border-2 rounded-lg p-24 flex flex-col gap-14">
+      <div className="flex  items-center gap-6">
         <label className="relative cursor-pointer">
           <img
             src={selectedImage || data.image || "https://via.placeholder.com/150"}
@@ -103,19 +104,19 @@ const ProfileDashboard = ({ firstName, lastName, email, mobileNo, profilePic }) 
         </label>
         <h1>{`${data.firstName} ${data.lastName}`}</h1>
       </div>
-      <div className="flex flex-col">
-        <p className="flex items-center">
+      <div className="flex flex-col gap-2">
+        <p className="flex justify-between">
           <span >Email:</span> {data.email}
         </p>
-        <p className="flex items-center">
+        <p className="flex justify-between">
           <span >Mobile:</span> {mobile}
         </p>
         {mobile ? (
           <div></div>
         ) : (
           <div className="flex flex-col">
-            <form onSubmit={handleMobileSubmit} className="flex flex-col">
-              <label>Mobile Number:</label>
+            <form onSubmit={handleMobileSubmit} className="flex flex-col justify-center gap-1">
+              <label htmlFor="mobileNo">Mobile Number:</label>
               <input
                 type="tel"
                 id="mobileNo"
@@ -125,14 +126,17 @@ const ProfileDashboard = ({ firstName, lastName, email, mobileNo, profilePic }) 
                 onChange={(e) => setInputMob(e.target.value)}
                 value={inputMob}
                 required
-                className="mb-2" 
+                className="border-gray-700 rounded border-2" 
               />
-              <button type="submit" >Send OTP</button>
+              <div className="flex justify-between items-center">
+                <div></div>
+                <button className="bg-gray-800 w-fit text-white p-2 rounded mt-2 " type="submit" >Send OTP</button>
+              </div>
             </form>
           </div>
         )}
         {showOtpInput && (
-          <form onSubmit={handleOtpSubmit} className="flex flex-col">
+          <form onSubmit={handleOtpSubmit} className="mt-6 flex flex-col justify-center gap-1">
             <label>Enter OTP:</label>
             <input
               type="text"
@@ -140,11 +144,12 @@ const ProfileDashboard = ({ firstName, lastName, email, mobileNo, profilePic }) 
               onChange={(e) => setOtp(e.target.value)}
               value={otp}
               required
-              className="mb-2"
+              className="border-gray-700 rounded border-2"
             />
-            <button type="submit">Verify OTP</button>
+            <button className="bg-gray-800 w-fit text-white p-2 rounded mt-2 mx-auto " type="submit">Verify OTP</button>
           </form>
         )}
+      </div>
       </div>
     </div>
   );

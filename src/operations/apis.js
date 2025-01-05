@@ -26,4 +26,7 @@ export const endpoints = {
     DELETE_BID: BASE_URL + "/bids/deleteBid",
 
     CREATE_DEAL: BASE_URL + "/deals/createDeal",
+
+    SENDOTP_FOR_PASSWORD_CHANGE: BASE_URL + "/auth/sendResetPasswordOtp",
+    RESET_PASSWORD: BASE_URL + "/auth/resetPassword"
 }

@@ -55,42 +55,50 @@ const AcceptBid = async (bidId) => {
 };
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center ">
       {data ? (
-      <div >
+      <div className="flex flex-col items-center gap-4 w-fit p-20 border-2 border-gray-300">
         {
           data.isActive && 
-          <div>Order is Currently Accepting Bids</div>
+          <div className="text-green-500"
+          >Order is Currently Accepting Bids</div>
         }
         {
           !data.isActive && 
-          <div>Order is filled. Not accepting Bids</div>
+          <div className="text-red-500"
+          >Order is filled. Not accepting Bids</div>
         }
-        <img src={data.coverPhoto} alt="" />
-        <img src={data.firstPic} alt="" />
-        <img src={data.secondPic} alt="" />
-        <img src={data.thirdPic} alt="" />
-        <img src={data.landDocument} alt="" />
-        <h3 >{data.crop}</h3>
+        <div className="flex flex-col gap-4">
+          <img  src={data.coverPhoto} alt="" />
+          <div className="flex gap-4">
+            <img className="h-full w-1/3" src={data.firstPic} alt="" />
+            <img className="h-full w-1/3" src={data.secondPic} alt="" />
+            <img className="h-full w-1/3" src={data.thirdPic} alt="" />
+          </div>
+          <a href={data.landDocument} download className="text-blue-500">
+            <img src={data.landDocument} alt="Land Document" className=""/>
+          </a>
+        </div>
+        <p className="bold text-gray-800" >{data.crop}</p>
         <p >{data.area} Acres</p>
         <p >₹{data.price}</p>
         {
           data.isActive &&
-            <div>
-              <div>Bids: </div>
+            <div className="border-black">
+              <div className="text-black ">Bids: </div>
               {
               data.bids && data.bids.length>0 ? 
                 (
                   data.bids.map((bid) => (
                       bid.isActive && 
-                      <div>
+                      <div className="border-b-black flex flex-col flex-wrap">
                           <div>₹ {bid.price}</div>
-                          <div>{bid.description}</div>
-                          <button onClick={()=> AcceptBid(bid._id)} >Accept Bid</button>
+                          <div className="text-sm">{bid.description}</div>
+                          <button className="rounded text-white bg-gray-800 p-4 active:bg-gray-600" onClick={()=> AcceptBid(bid._id)} >Accept Bid</button>
                       </div>
                   ))
                 ): 
-                (<div>No Bids Till now</div>)
+                (<div className="text-lg ">No Bids Till now</div>)
               }
             </div>
         }

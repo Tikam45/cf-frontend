@@ -60,6 +60,9 @@ const Navbar = () => {
                   <Link to="/profile" className="px-4 py-2">
                     Profile
                   </Link>
+                  <Link to="/resetPassword" className="px-4 py-2">
+                    Reset Password
+                  </Link>
                   <button className="px-4 py-2 " onClick={handleLogout}>
                     Logout
                   </button>

@@ -67,16 +67,16 @@ const OrderDetails = () => {
                     <div className="flex flex-col gap-4">
                         <img src={data.coverPhoto} alt="Cover Photo" className="" />
                         <div className="flex  gap-4">
-                            <img src={data.firstPic} />
-                            <img src={data.secondPic}   />
-                            <img src={data.thirdPic}  />
+                            <img className="h-full w-1/3" src={data.firstPic} />
+                            <img className="h-full w-1/3" src={data.secondPic}   />
+                            <img className="h-full w-1/3" src={data.thirdPic}  />
                         </div>
                         <a href={data.landDocument} download className="text-blue-500">
                             <img src={data.landDocument} alt="Land Document" className=""/>
                         </a>
                     </div>
 
-                    <h3>{data.crop}</h3>
+                    <p className="bold text-gray-800">{data.crop}</p>
                     <p>{data.area} Acres</p>
                     <p>₹{data.price}</p>
                     {data.isActive && (
