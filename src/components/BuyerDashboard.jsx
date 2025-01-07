@@ -23,12 +23,12 @@ const BuyerDashboard = ({bids, setCount}) =>{
     const deleteBid = async(bidId) => {
         const result = await removeBid({token , bid: bidId});
         console.log(result);
-        if(result.data.success){
+        if(result?.data?.success){
             toast.success("Bid removed Successfully");
             setCount((count) => count+1);
         }
         else{
-            toast.error(result.data.message);
+            toast.error(result?.data?.message);
         }
     }
 

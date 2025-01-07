@@ -82,7 +82,7 @@ const CropForm = () => {
     } catch (error) {
       console.error("Error creating order:", error);
       toast.dismiss(toastId);
-      toast.error(error.response.data.message || "Something went wrong");
+      toast.error(error?.response?.data?.message || "Something went wrong");
     }
   };
   

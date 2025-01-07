@@ -9,10 +9,11 @@ async function removeOrder({orderId, token}) {
         const result = await apiConnector("DELETE", REMOVE_ORDER, 
             {orderId: orderId, token: token}
         );
+        toast.success(result?.data?.message);
         return result;
     } 
     catch (error) {
-        toast.error(error.message);
+        toast.error(error?.response?.data?.message || "Internal Server Error" );
         return ;
     }
 }

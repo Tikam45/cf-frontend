@@ -18,8 +18,8 @@ const ProfileDashboard = ({ firstName, lastName, email, mobileNo, profilePic }) 
   const getInfo = async () => {
     try {
       const response = await getUserDetails({ token });
-      setData(response.data.user);
-      setMobile(response.data.user.mobileNo);
+      setData(response?.data?.user);
+      setMobile(response?.data?.user?.mobileNo);
     } catch (error) {
       console.log(error);
       toast.error("Unable to fetch user details");
@@ -34,10 +34,10 @@ const ProfileDashboard = ({ firstName, lastName, email, mobileNo, profilePic }) 
     e.preventDefault();
     try {
       const response = await sendOtpMessage({ token, mobile: inputMob });
-      if (response.data.success) {
+      if (response?.data?.success) {
         setShowOtpInput(true);
       } else {
-        toast.error(response.data.message);
+        toast.error(response?.data?.message);
       }
     } catch (error) {
       toast.error("Internal Server Error");
@@ -48,15 +48,15 @@ const ProfileDashboard = ({ firstName, lastName, email, mobileNo, profilePic }) 
     e.preventDefault();
     try {
       const response = await verifyOtpMessage({ token, mobile: inputMob, otp });
-      if (response.data.success) {
-        toast.success(response.data.message);
+      if (response?.data?.success) {
+        // toast.success(response?.data?.message);
         setShowOtpInput(false);
         setCount(count + 1);
       } else {
-        toast.error(response.data.message);
+        // toast.error(response?.data?.message);
       }
     } catch (error) {
-      toast.error("Internal Server Error");
+      // toast.error("Internal Server Error");
     }
   };
 
@@ -72,14 +72,14 @@ const ProfileDashboard = ({ firstName, lastName, email, mobileNo, profilePic }) 
       // formDataToSend.append("profilePic", image);
       // console.log("formDataToSend", formDataToSend, image);
       const result = await updateImage({token,profilePic: file});
-      console.log("hi", result.data.user);
-      if(result.data.success){
-        toast.success(result.data.message);
-        dispatch(setUser(result.data.user));
-        localStorage.setItem("user", JSON.stringify(result.data.user))
+      console.log("hi", result?.data?.user);
+      if(result?.data?.success){
+        toast.success(result?.data?.message);
+        dispatch(setUser(result?.data?.user));
+        localStorage.setItem("user", JSON.stringify(result?.data?.user))
     }
     else{
-        toast.error(result.data.message);
+        toast.error(result?.data?.message);
     }
     }
   };
@@ -90,8 +90,8 @@ const ProfileDashboard = ({ firstName, lastName, email, mobileNo, profilePic }) 
       <div className="flex  items-center gap-6">
         <label className="relative cursor-pointer">
           <img
-            src={selectedImage || data.image || "https://via.placeholder.com/150"}
-            alt={`${data.firstName} ${data.lastName}`}
+            src={selectedImage || data?.image || "https://via.placeholder.com/150"}
+            alt={`${data?.firstName} ${data?.lastName}`}
             className="h-20 w-20 rounded-full object-cover"
           />
           <input
@@ -102,11 +102,11 @@ const ProfileDashboard = ({ firstName, lastName, email, mobileNo, profilePic }) 
             className="absolute top-0 left-0 w-full h-full opacity-0"
           />
         </label>
-        <h1>{`${data.firstName} ${data.lastName}`}</h1>
+        <h1>{`${data?.firstName} ${data?.lastName}`}</h1>
       </div>
       <div className="flex flex-col gap-2">
-        <p className="flex gap-2">
-          <span >Email:</span> {data.email}
+        <p className="flex gap-6">
+          <span >Email:</span> {data?.email}
         </p>
         <p className="flex gap-2">
           <span >Mobile:</span> {mobile}

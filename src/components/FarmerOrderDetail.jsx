@@ -17,11 +17,11 @@ const OrderCardForFarmer = () => {
     const toastId = toast.loading("Loading");
     const response = await removeOrder({orderId: data._id, token: token})
     toast.dismiss(toastId);
-    if(response.data.success){
+    if(response?.data?.success){
       toast.success("Order Removed");
     }
     else{
-      toast.error(response.data.message);
+      toast.error(response?.data?.message);
     }
     navigate("/dashboard");
   }
@@ -36,7 +36,7 @@ const AcceptBid = async (bidId) => {
 
       // Check if the API call was successful
       if (result?.data?.success) {
-          toast.success(result.data.message); // Show success toast
+          // toast.success(result?.data?.message); // Show success toast
           navigate("/dashboard"); // Navigate to the dashboard
       } else {
           // Handle case when success is false
@@ -47,7 +47,7 @@ const AcceptBid = async (bidId) => {
 
       // Handle specific error responses gracefully
       if (error?.response?.data?.message) {
-          toast.error(error.response.data.message);
+          toast.error(error?.response?.data?.message);
       } else {
           toast.error("Internal Server Error");
       }

@@ -15,7 +15,7 @@ const createBid = async({ description, orderId, price, token}) => {
     }
     catch(error){
         // console.log("hfjhf")
-        toast.error(error?.response?.data?.message);
+        toast.error(error?.response?.data?.message || "Bid Creation Failed");
         return;
     }
 }

@@ -7,18 +7,22 @@ import { Link } from 'react-router-dom';
 
 const Marketplace = () => {
     const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
 
 
     async function fetchData(){
         try {
+            setLoading(true);
             const response = await getOrders();
-            const orders = response.data.orders;
+            const orders = response?.data?.orders;
+            setLoading(false);
             if(orders){
                 console.log("hello", orders);
                 setData(orders);
             }
-            console.log("orders", response.data.orders, data);
+            console.log("orders", response?.data?.orders, data);
         } catch (error) {
+            setLoading(false);
             console.error('Error fetching orders:', error);
         }
     };
@@ -32,18 +36,30 @@ const Marketplace = () => {
     // }, [data]);
 
     return (
-        <div>
-            { data && 
-                data.map((order, index) => (
-                    <div key={index}>
-                        <OrderCard data={order} />
-                    </div>
-                ))
-            }
+        <div className="mt-4 flex flex-col gap-8 w-screen">
             {
-                !data && <div>No Orders are availabe currently</div>
+                loading &&
+                <div className="mx-auto">
+                    Fetching the Orders...
+                </div>
             }
-            <Link to="/createOrder">Create New Order</Link>
+            {   !loading && 
+                <div className="">
+                    <div className="flex flex-wrap gap-7">
+                        { data.length > 0 && 
+                            data.map((order, index) => (
+                                <div key={index}>
+                                    <OrderCard data={order} />
+                                </div>
+                            ))
+                        }
+                    </div>
+                    {
+                        data.length === 0 && <div className="w-screen mx-auto text-lg">No Orders are availabe currently</div>
+                    }
+                </div>
+            }
+            <Link className="w-fit bg-purple-800 p-2 text-white rounded ml-1.5 active:bg-purple-500" to="/createOrder">Create New Order</Link>
         </div>
     )
 }

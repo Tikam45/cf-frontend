@@ -1,6 +1,7 @@
 
 import { endpoints } from "./apis"
 import { apiConnector } from "./apiCall"
+import toast from "react-hot-toast";
 
 
 const createDeal = async({bidId, token}) => {
@@ -10,10 +11,12 @@ const createDeal = async({bidId, token}) => {
         const result = await apiConnector("POST", CREATE_DEAL, 
             {bidId, token}
         )
+        toast.success(result?.data?.message);
         console.log(result);
         return result;
     }
     catch (error) {
+        toast.error(error?.response?.data?.message || "Internal Server Error")
         console.log(error);
         return error;
     }

@@ -17,14 +17,14 @@ const Dashboard = () => {
     try {
       const res = await getUserOrdersBidsAndDeals({ token });
       console.log(res);
-      if (res && res.data) {
-        setOrders(res.data.orders);
-        setBids(res.data.bids);
-        setDeals(res.data.deals);
+      if (res && res?.data) {
+        setOrders(res?.data?.orders);
+        setBids(res?.data?.bids);
+        setDeals(res?.data?.deals);
       }
     } catch (error) {
       console.log(error);
-      toast.error(error.message);
+      toast.error(error?.response?.data?.message);
     }
   }
 

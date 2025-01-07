@@ -15,7 +15,7 @@ async function getUserDetails({token}) {
     }
     catch (error) {
         console.log(error);
-        toast.error(error.message);
+        toast.error(error?.response?.data?.message || "Internal Server Error");
         return;
     }
 }
@@ -26,11 +26,12 @@ async function sendOtpMessage({token , mobile}) {
         const result = await apiConnector("POST", SEND_OTP_MESSAGE, 
             {token, mobile}
         )
+        toast.success(result?.data?.message);
         return result;
     }
     catch(error){
         console.log(error);
-        toast.error("Error while sending otp");
+        toast.error(error?.response?.data?.message || "Error while sending otp");
     }
 }
 
@@ -40,12 +41,13 @@ async function verifyOtpMessage({token, otp, mobile}) {
         const result = await apiConnector("PUT", UPDATE_MOBILE,
             {token, otp, mobile}
         );
+        toast.success(result?.data?.message);
         console.log(result);
         return result;
     }
     catch (error) {
         console.log(error);
-        toast.error("Error while verifying");
+        toast.error(error?.response?.data?.message || "Error while verifying");
     }
 }
 

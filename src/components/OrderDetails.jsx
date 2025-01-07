@@ -28,7 +28,7 @@ const OrderDetails = () => {
             });
 
             if (result?.data?.success) {
-                toast.success("Bid Created Successfully");
+                // toast.success("Bid Created Successfully");
                 setShowBidForm(false);
                 setData(data.order);
             }
