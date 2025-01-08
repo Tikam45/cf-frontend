@@ -40,7 +40,10 @@ const Marketplace = () => {
             const result = await getCropTypes();
             console.log("result", result);
             if(result){
+                console.log(result?.data?.cropTypes);
                 setCropTypes(result?.data?.cropTypes);
+                console.log(cropTypes);
+                console.log(cropTypes.length);
             }
             setLoading(false);
             if(orders){

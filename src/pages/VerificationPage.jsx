@@ -17,7 +17,7 @@ function VerifyEmail() {
 
   useEffect(() => {
     // Only allow access to this route when user has filled the signup form
-    // if (!signupData) navigate("/signup");
+    if (!signupData) navigate("/signup");
   }, [signupData, navigate]);
 
   const handleVerifyAndSignup = (e) => {
