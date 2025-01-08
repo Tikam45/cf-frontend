@@ -20,8 +20,10 @@ const Marketplace = () => {
             setOrderData(data);
         }
         else{
-            const result = filterContents({data: data?.data, key: "crop", cropType});
-            setOrderData(result);
+            if(data && cropType){
+                const result = filterContents({data: data?.data, key: "crop", cropType});
+                setOrderData(result);
+            }
         }
     }
 
