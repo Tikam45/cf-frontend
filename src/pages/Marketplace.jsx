@@ -27,9 +27,9 @@ const Marketplace = () => {
         }
     }
 
-    useEffect(() => {
-        filterOrders();
-    }, [cropType])
+    // useEffect(() => {
+    //     filterOrders("All");
+    // }, [])
 
 
     async function fetchData(){
@@ -42,8 +42,8 @@ const Marketplace = () => {
             if(result){
                 console.log(result?.data?.cropTypes);
                 setCropTypes(result?.data?.cropTypes);
-                console.log(cropTypes);
-                console.log(cropTypes.length);
+                // console.log(cropTypes);
+                // console.log(cropTypes.length);
             }
             setLoading(false);
             if(orders){
@@ -87,9 +87,9 @@ const Marketplace = () => {
                              >
                                 <option key="All" value="All">All</option>
                                 {
-                                    cropTypes.map((data, index) => {
+                                    cropTypes.map((data, index) => (
                                         <option key={data.crop} value={data.crop}>{data.crop}</option>
-                                    })
+                                    ))
                                 }
                             </select>
                         </div>
