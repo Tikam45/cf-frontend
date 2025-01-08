@@ -32,13 +32,13 @@ const Navbar = () => {
 
 
   return (
-    <div className="flex justify-between items-center p-4 bg-gray-800 text-white flex-wrap w-screen">
-      <BiSolidFoodMenu className=""/>
+    <div className="w-screen flex justify-between items-center p-4 bg-gray-800 text-white flex-wrap fixed top-0">
+      <Link to="/"><BiSolidFoodMenu className=""/></Link>
       <h1 className="bold text-3xl">Contract Farming</h1>
       <div >
-        <div className="flex space-x-4">
-        {token == null && <Link to="/login">Login</Link>}
-        {token == null && <Link to="/signup">Signup</Link>}
+        <div className="flex space-x-8 mr-4 flex-wrap">
+        {token == null && <Link to="/login" className="bg-gray-600 p-2 rounded active:bg-gray-700">Login</Link>}
+        {token == null && <Link to="/signup" className="bg-gray-600 p-2 rounded active:bg-gray-700">Signup</Link>}
         </div>
         {user && (
           <div

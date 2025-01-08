@@ -10,13 +10,14 @@ import { useNavigate } from "react-router-dom";
 
 function VerifyEmail() {
   const [otp, setOtp] = useState("");
-  const { signupData, loading } = useSelector((state) => state.auth);
+  const { signupData } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     // Only allow access to this route when user has filled the signup form
-    if (!signupData) navigate("/signup");
+    // if (!signupData) navigate("/signup");
   }, [signupData, navigate]);
 
   const handleVerifyAndSignup = (e) => {
@@ -33,16 +34,16 @@ function VerifyEmail() {
   };
 
   return (
-    <div className="verify-email-container">
+    <div className="h-screen w-screen flex justify-center items-center">
       {loading ? (
-        <div className="loader"></div>
+        <div className=""></div>
       ) : (
-        <div className="verify-email-form-container">
-          <h1 className="verify-email-title">Verify Email</h1>
-          <p className="verify-email-text">
+        <div className="p-4 border-black border-2 rounded flex flex-col justify-center items-center gap-3">
+          <h1 className="text-lg mb-2">Verify Your Email</h1>
+          <p className="">
             A verification code has been sent to you. Enter the code below
           </p>
-          <form onSubmit={handleVerifyAndSignup}>
+          <form onSubmit={handleVerifyAndSignup} className="flex flex-col justify-center items-center gap-3">
             <OtpInput
               value={otp}
               onChange={setOtp}
@@ -51,21 +52,24 @@ function VerifyEmail() {
                 <input
                   {...props}
                   placeholder="-"
-                  className="otp-input-field"
+                  className="border-gray-500 border-2 rounded mx-2"
                 />
               )}
-              containerStyle="otp-input-container"
+              containerStyle="my-2"
             />
-            <button type="submit" className="verify-button">
+            <button type="submit" className="bg-purple-700 text-white p-2 rounded px-6">
               Verify Email
             </button>
           </form>
-          <div className="other-links">
-            <Link to="/signup" className="navigation-link">
-              <BiArrowBack /> Back To Signup
+          <div className="flex flex-row mt-6 justify-between w-full">
+            <Link to="/signup" className="">
+              <div className="flex items-center gap-2 bg-gray-800 text-white p-2 rounded active:bg-gray-500">
+              <BiArrowBack /> 
+              <p>Back To Signup</p>
+              </div>
             </Link>
             <button
-              className="resend-button"
+              className=""
               onClick={() => {
                   dispatch(sendOtp(signupData?.formData.email, navigate))
                   // console.log("data", signupData)
@@ -73,7 +77,10 @@ function VerifyEmail() {
                 }
               }
             >
-              <RxCountdownTimer /> Resend it
+              <div className="flex items-center gap-2 bg-gray-800 text-white p-2 rounded active:bg-gray-500">
+              <RxCountdownTimer /> 
+              <p>Resend it</p>
+              </div>
             </button>
           </div>
         </div>

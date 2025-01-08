@@ -39,7 +39,7 @@ const Signup = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div className="flex flex-col items-center justify-center h-screen m-y-auto">
       {
         token && 
         <h2>You are already Signed up</h2>

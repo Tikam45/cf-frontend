@@ -3,11 +3,31 @@ import { useState,useEffect } from "react";
 import { getOrders } from "../operations/GetOrders";
 import OrderCard from "../components/OrderCard";
 import { Link } from 'react-router-dom';
+import getCropTypes from "../operations/getCropTypes";
+import { filterContents } from "../utils/FilteringOrders";
 
 
 const Marketplace = () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [orderData, setOrderData] = useState([]);
+    const [cropTypes , setCropTypes] = useState([]);
+    const [cropType, setCropType] = useState("All");
+
+    const filterOrders = (value)=> {
+        setCropType(value);
+        if(cropType === "All"){
+            setOrderData(data);
+        }
+        else{
+            const result = filterContents({data: data?.data, crop, cropType});
+            setOrderData(result);
+        }
+    }
+
+    useEffect(() => {
+        filterOrders();
+    }, [cropType])
 
 
     async function fetchData(){
@@ -15,10 +35,16 @@ const Marketplace = () => {
             setLoading(true);
             const response = await getOrders();
             const orders = response?.data?.orders;
+            const result = await getCropTypes();
+            console.log("result", result);
+            if(result){
+                setCropTypes(result?.data?.cropTypes);
+            }
             setLoading(false);
             if(orders){
-                console.log("hello", orders);
+                // console.log("hello", orders);
                 setData(orders);
+                setOrderData(orders);
             }
             console.log("orders", response?.data?.orders, data);
         } catch (error) {
@@ -45,9 +71,27 @@ const Marketplace = () => {
             }
             {   !loading && 
                 <div className="">
+                    {
+                        cropTypes.length > 0 && 
+                        <div>
+                            <p>Filter By: </p>
+                            <select
+                             value={cropType}
+                             onChange={(e) => filterOrders(e.target.value)}
+                             className="rounded-lg px-1 py-1 bg-gray-100 cursor-pointer outline-none"
+                             >
+                                <option key="All" value="All">All</option>
+                                {
+                                    cropTypes.map((data, index) => {
+                                        <option key={data.crop} value={data.crop}>{data.crop}</option>
+                                    })
+                                }
+                            </select>
+                        </div>
+                    }
                     <div className="flex flex-wrap gap-7">
-                        { data.length > 0 && 
-                            data.map((order, index) => (
+                        { orderData.length > 0 && 
+                            orderData.map((order, index) => (
                                 <div key={index}>
                                     <OrderCard data={order} />
                                 </div>
@@ -55,7 +99,7 @@ const Marketplace = () => {
                         }
                     </div>
                     {
-                        data.length === 0 && <div className="w-screen mx-auto text-lg">No Orders are availabe currently</div>
+                        orderData.length === 0 && <div className="w-screen mx-auto text-lg">No Orders are availabe currently</div>
                     }
                 </div>
             }

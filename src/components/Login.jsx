@@ -26,14 +26,14 @@ const Login = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div className="flex flex-col items-center justify-center h-screen m-y-auto">
       {
         token && 
         <h3>You are already Logged in</h3>
       }
       {
         !token && 
-        <div className="flex flex-col items-center justify-center w-fit gap-4 p-20 border-2 border-gray-300">
+        <div className="flex flex-col items-center justify-center w-fit gap-4 p-20 border-2 border-gray-300 ">
           <h2 className="bold text-2xl">Login</h2>
           <form onSubmit={handleOnSubmit} className="flex flex-col gap-3 justify-center items-center">
             <input

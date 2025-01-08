@@ -20,9 +20,12 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div>
-      <Navbar/>
-      <Routes>
+    <div className='flex flex-col gap-24'>
+      <div className=''>
+      <Navbar className =""/>
+      </div>
+      <div className="">
+      <Routes >
         <Route path="/" element = {<Marketplace/>} />
         <Route path="/dashboard" element={<Dashboard/>} />
         <Route path="/createOrder" element={<CropForm/>} />
@@ -37,6 +40,7 @@ function App() {
         <Route path="/resetPassword" element={<ResetPassword/>}/>
         <Route path='/change-password-form' element={<PasswordChangeForm/>} />
       </Routes>
+      </div>
     </div>
   )
 }

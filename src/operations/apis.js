@@ -28,5 +28,7 @@ export const endpoints = {
     CREATE_DEAL: BASE_URL + "/deals/createDeal",
 
     SENDOTP_FOR_PASSWORD_CHANGE: BASE_URL + "/auth/sendResetPasswordOtp",
-    RESET_PASSWORD: BASE_URL + "/auth/resetPassword"
+    RESET_PASSWORD: BASE_URL + "/auth/resetPassword",
+
+    GET_CROP_TYPES: BASE_URL + "/getCropTypes",
 }
