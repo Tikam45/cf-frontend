@@ -16,13 +16,13 @@ const Marketplace = () => {
 
     const filterOrders = (value)=> {
         setCropType(value);
-        if(cropType === "All"){
+        if(value === "All"){
             setOrderData(data);
         }
         else{
             if(data.length> 0 && cropType){
                 console.log("hi", data, data?.data);
-                const result = filterContents({data: data, key: "crop", value: cropType});
+                const result = filterContents({data: data, key: "crop", value: value});
                 console.log("filtered data", result);
                 setOrderData(result);
             }
