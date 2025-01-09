@@ -3,12 +3,15 @@ import { createOrder } from "../operations/CreateOrder";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
+import getCropTypes from "../operations/getCropTypes";
 const reader = new FileReader();
 
 const CropForm = () => {
     const navigate = useNavigate();
     const [imgUrl, setImgUrl] = useState("");
     const {token} = useSelector((state) => state.auth);
+    const [cropTypes, setCropTypes] = useState([]);
+    const [crop, setCrop] = useState("");
     // const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     crop: "",
@@ -20,6 +23,11 @@ const CropForm = () => {
     price: "",
     landDocument: null,
   });
+
+  useState(async() => {
+    const response = await getCropTypes();
+    setCropTypes(response?.data?.cropTypes);
+  }, [])
   
   // function previewFile(file, name) {
   //   const reader = new FileReader();
@@ -47,7 +55,7 @@ const CropForm = () => {
     //   console.log("name", name);
     //   previewFile(files[0], name);
     // }
-    console.log('hi');
+    console.log('hi', name, value, files);
     setFormData({
       ...formData,
       [name]: files? files[0] : value,
@@ -151,14 +159,14 @@ const CropForm = () => {
 
         <label style={styles.label}>
           Crop Name:
-          <input
-            type="text"
-            name="crop"
-            value={formData.cropName}
-            onChange={handleChange}
-            style={styles.input}
-            required
-          />
+          <select name="crop" id="crop" 
+            onChange={(e) => handleChange(e)}>
+            {cropTypes && cropTypes.length > 0 && 
+              cropTypes.map((c) => (
+                <option key={c.crop} value={c.crop}>{c.crop}</option>
+              ))
+            }
+          </select>
         </label>
 
         <label style={styles.label}>
