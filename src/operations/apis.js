@@ -29,8 +29,8 @@ export const endpoints = {
 
     SENDOTP_FOR_PASSWORD_CHANGE: BASE_URL + "/auth/sendResetPasswordOtp",
     RESET_PASSWORD: BASE_URL + "/auth/resetPassword",
-    SENDOTP_FOR_FORGOT_PASSWORD: BASE_URL + "sendForgotPasswordOtp",
-    RESET_FORGOT_PASSWORD : BASE_URL + "resetForgotPassword",
+    SENDOTP_FOR_FORGOT_PASSWORD: BASE_URL + "/sendForgotPasswordOtp",
+    RESET_FORGOT_PASSWORD : BASE_URL + "/resetForgotPassword",
 
     GET_CROP_TYPES: BASE_URL + "/getCropTypes",
 }
