@@ -35,7 +35,7 @@ const Login = () => {
         !token && 
         <div className="flex flex-col items-center justify-center w-fit gap-4 p-20 border-2 border-gray-300 ">
           <h2 className="bold text-2xl">Login</h2>
-          <form onSubmit={handleOnSubmit} className="flex flex-col gap-3 justify-center items-center">
+          <form onSubmit={handleOnSubmit} className="flex flex-col gap-2 justify-center items-center">
             <input
               type="email"
               placeholder="Email"
@@ -52,13 +52,18 @@ const Login = () => {
               value={password}
               onChange={handleOnChange}
               required
-              className="mb-4 w-fit border-2 border-gray-300 p-2"
+              className=" w-fit border-2 border-gray-300 p-2"
             />
-            <button type="submit" className="bg-gray-900 text-white p-3 rounded hover:bg-gray-500">Login ➡️</button>
+            <Link to="/forgotPassword" className="text-blue-500 flex justify-start">
+              Forget Password ?
+            </Link>
+            <button type="submit" className="bg-gray-900 text-white p-3 rounded hover:bg-gray-500 mt-3">Login ➡️</button>
           </form>
-          <Link to="/signup" className="text-blue-500">
-            Don't have an account? Signup
-          </Link>
+          <div className="flex flex-col gap-6 items-center">
+            <Link to="/signup" className="text-blue-500">
+              Don't have an account? Signup
+            </Link>
+          </div>
         </div>
       }
     </div>

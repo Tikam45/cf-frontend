@@ -157,10 +157,11 @@ const CropForm = () => {
       <form style={styles.form} onSubmit={handleSubmit} enctype="">
         <h2 style={styles.heading}>Crop Details</h2>
 
-        <label style={styles.label}>
+        <label style={styles.label} className="flex gap-5">
           Crop Name:
           <select name="crop" id="crop" 
             onChange={(e) => handleChange(e)}>
+            <option value="">Select crop</option>
             {cropTypes && cropTypes.length > 0 && 
               cropTypes.map((c) => (
                 <option key={c.crop} value={c.crop}>{c.crop}</option>

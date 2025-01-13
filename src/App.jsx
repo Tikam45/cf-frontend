@@ -15,6 +15,7 @@ import ProfileDashboard from './components/ProfilePage';
 import BidsDetails from './components/BidsDetails';
 import ResetPassword from './pages/ResetPassword';
 import PasswordChangeForm from './components/PasswordChangeForm';
+import ForgetPassword from './pages/ForgetPassword';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -39,6 +40,7 @@ function App() {
         <Route path="/profile" element={<ProfileDashboard/>}/>
         <Route path="/resetPassword" element={<ResetPassword/>}/>
         <Route path='/change-password-form' element={<PasswordChangeForm/>} />
+        <Route path='/forgotPassword' element={<ForgetPassword/>}/>
       </Routes>
       </div>
     </div>

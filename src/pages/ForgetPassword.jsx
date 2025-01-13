@@ -1,24 +1,18 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { OtpForForgotPassword, resetForgotPassword } from "../operations/ResetPassword";
 import toast from "react-hot-toast";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { resetPassword } from "../operations/ResetPassword";
-import { useSelector } from "react-redux";
 
-const PasswordChangeForm = ({allowed}) => {
+const ForgetPassword = () => {
     const navigate = useNavigate();
-    const {token} = useSelector((state) => state.auth);
     const [isSame , setIsSame] = useState(false);
     const [formData, setFormData] = useState({
+        email: "",
         otp: "",
         password: "",
         confirmPassword: "",
     });
-    useEffect(() => {
-        if(!token){
-            navigate("/");
-        }
-    }, [])
 
     const changeHandler = (e) =>  {
         const {name, value} = e.target;
@@ -28,6 +22,13 @@ const PasswordChangeForm = ({allowed}) => {
         })
     }
 
+    const sendOtp = async(e) => {
+        e.preventDefault();
+        if(formData.email !== ""){
+            const response = await OtpForForgotPassword({email: formData.email});
+        }
+    }
+
     const submitHandler = async(e) => {
         e.preventDefault();
         if(formData.password !== formData.confirmPassword){
@@ -35,14 +36,29 @@ const PasswordChangeForm = ({allowed}) => {
         }
         else{
             setIsSame(false);
-            const result = await resetPassword({token, otp: formData.otp, password: formData.password, navigate});
+            const result = await resetForgotPassword({email: formData.email, otp: formData.otp, password: formData.password, navigate});
         }
     }
     return (
         <div className="h-screen w-screen flex flex-col flex-wrap justify-center items-center">
+            
             <div className="border-gray-800 border-2 gap-16 p-8 flex flex-col flex-wrap justify-center items-center rounded-md">
-                <p className="text-xl bold">Reset Your Password</p>
+                <p>
+                VERIFY EMAIL AND CHANGE PASSWORD
+                </p>
                 <form onSubmit={submitHandler} className="flex flex-col gap-8">
+                    <div className="flex flex-row gap-3 w-full flex-wrap">
+                        <input type="text" 
+                        placeholder="Enter Email here"
+                        id="email"
+                        value={formData.email}
+                        name="email"
+                        onChange={changeHandler}
+                        required
+                        className="border-2 border-gray rounded w-8/12"
+                        />
+                        <button className="p-2 bg-purple-500 text-white rounded active:bg-purple-300" onClick={(e) => sendOtp(e)}>SEND OTP</button>
+                    </div>
                     <div className="flex flex-row justify-between">
                         <label htmlFor="otp">Otp:</label>
                         <input 
@@ -53,7 +69,7 @@ const PasswordChangeForm = ({allowed}) => {
                         name="otp"
                         onChange={changeHandler}
                         required
-                        className="border-2 border-black rounded"
+                        className="border-2 border-gray rounded"
                         />
                     </div>
                     <div className="flex flex-row justify-between">
@@ -66,7 +82,7 @@ const PasswordChangeForm = ({allowed}) => {
                         id="password"
                         onChange={changeHandler}
                         required
-                        className="border-2 border-black rounded"
+                        className="border-2 border-gray rounded"
                         />
                     </div>
                     <div className="flex flex-row justify-between gap-4">
@@ -79,10 +95,10 @@ const PasswordChangeForm = ({allowed}) => {
                         id="confirmPassword"
                         onChange={changeHandler}
                         required
-                        className="border-2 border-black rounded"
+                        className="border-2 border-gray rounded"
                         />
                     </div>
-                    <button className="bg-purple-700 text-white p-1.5 rounded text-md active:bg-purple-400" type="submit"> Change Password</button>
+                    <button className="bg-purple-700 text-white p-1.5 rounded active:bg-purple-400" type="submit">Change Password</button>
                 </form>
                 {
                     isSame && 
@@ -95,4 +111,4 @@ const PasswordChangeForm = ({allowed}) => {
     )
 }
 
-export default PasswordChangeForm;
+export default ForgetPassword;
