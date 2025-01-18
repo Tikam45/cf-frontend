@@ -60,7 +60,7 @@ const DealsDashBoard = ({deals}) => {
                                 deal.ongoing && 
                                 <div>
                                     <button onClick={() => PaymentHandler({deal})}>Pay Now</button>
-                                    <p>Farmer has Accepted Your Bid. Pay 10% amount of Your deal before {deal.createdAt.getTime() + 24 *60*60*1000}. Otherwise the Deal will be cancelled</p>
+                                    <p>Farmer has Accepted Your Bid. Pay 10% amount of Your deal before {deal.createdAt + 24 *60*60*1000}. Otherwise the Deal will be cancelled</p>
                                 </div>
                             }
                         </div>
