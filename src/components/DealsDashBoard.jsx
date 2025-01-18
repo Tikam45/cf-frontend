@@ -15,7 +15,7 @@ const DealsDashBoard = ({deals}) => {
 
     const PaymentHandler = async({deal}) => {
 
-        const response = await createPaymentOrder(deal?.amount);
+        const response = await createPaymentOrder({amount :deal?.price});
         console.log(response);
         const options = {
             key: process.env.RAZORPAY_KEY,
