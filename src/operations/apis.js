@@ -32,5 +32,8 @@ export const endpoints = {
     SENDOTP_FOR_FORGOT_PASSWORD: BASE_URL + "/sendForgotPasswordOtp",
     RESET_FORGOT_PASSWORD : BASE_URL + "/resetForgotPassword",
 
+    CHECKOUT: BASE_URL + "/checkout",
+    PAYMENT_VERIFICATION : BASE_URL + "/paymentVerification",
+
     GET_CROP_TYPES: BASE_URL + "/getCropTypes",
 }
