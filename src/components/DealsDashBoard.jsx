@@ -2,12 +2,16 @@ import { useNavigate } from "react-router-dom";
 import HighlightedButton from "./HighlightedButton";
 import {endpoints} from "../operations/apis"
 import { createPaymentOrder } from "../operations/payment";
+import { useSelector } from "react-redux";
 
 const DealsDashBoard = ({deals}) => {
     const navigate = useNavigate();
     const moreDetailsHandler = (orderId) => {
         navigate(`/order/${orderId}`);
     }
+
+    const {user} = useSelector((state) => state.profile);
+
     console.log(deals);
     // background: #C9CCD3;
     // background-image: linear-gradient(-180deg, rgba(255,255,255,0.50) 0%, rgba(0,0,0,0.50) 100%);
@@ -54,14 +58,20 @@ const DealsDashBoard = ({deals}) => {
                             <div className="price">Price: ₹{deal.price}</div>
                             <div className="user">Buyer: {deal.buyer.firstName} {deal.buyer.lastName}</div>
                             <div className="user">Seller: {deal.seller.firstName} {deal.seller.lastName}</div>
-                            <HighlightedButton text="More Details" onClick={() => moreDetailsHandler(deal.order._id)}
-                                className="items-center self-center"/>
+                            <button onClick={() => moreDetailsHandler(deal.order._id)}
+                                className="items-center self-center">More Details</button>
                             {
-                                deal.ongoing && 
-                                <div>
-                                    <button onClick={() => PaymentHandler({deal})}>Pay Now</button>
-                                    <p>Farmer has Accepted Your Bid. Pay 10% amount of Your deal before {deal.createdAt + 24 *60*60*1000}. Otherwise the Deal will be cancelled</p>
-                                </div>
+                                deal?.ongoing && 
+                                    deal?.buyer?.email === user.email ? (
+                                        <div>
+                                            <button onClick={() => PaymentHandler({deal})}>Pay Now</button>
+                                            <p>Farmer has Accepted Your Bid. Pay 10% amount of Your deal before {deal.createdAt + 24 *60*60*1000}. Otherwise the Deal will be cancelled</p>
+                                        </div>
+                                    ):(
+                                        <div>
+                                            Buyer has Not paid the advance amount yet. If he doesn't pay till {deal.createdAt + 24*60*60*1000} , the deal will be cancelled and order will go live.
+                                        </div>
+                                    )
                             }
                         </div>
                     ))
